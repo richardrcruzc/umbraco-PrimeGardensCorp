@@ -1,0 +1,28 @@
+﻿@inherits UmbracoTemplatePage<Contact>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@using Terratype;
+@{
+    Layout = "demoDocument.cshtml";
+}
+<!--
+Html.Partial("~/Views/Partials/SectionHeader.cshtml")
+-->
+   <section id="contact" class="wow fadeInUp">
+    <div class="container">
+
+      
+
+          <div class="section-header">
+                <h2>@Model.Content.MapHeader</h2>
+               <p> @Html.Terratype(Model.Content.Map)</p>
+            </div>
+
+            <div class="col-md-6">
+                <h2>@Model.Content.ContactFormHeader</h2>
+                @Model.Content.ContactIntro
+                @Umbraco.RenderMacro("renderUmbracoForm", new { FormGuid = Model.Content.ContactForm.ToString() })
+            </div>
+
+        
+    </div>
+</section>

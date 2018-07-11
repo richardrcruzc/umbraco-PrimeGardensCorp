@@ -1,1 +1,2 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="PrimeGardensCorp.MvcApplication" Language="C#" %>
+﻿<%@ Application Inherits="Umbraco.Web.UmbracoApplication" Language="C#" %>
+          

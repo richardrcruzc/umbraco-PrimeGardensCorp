@@ -1,0 +1,45 @@
+﻿@inherits UmbracoViewPage
+
+@using Umbraco.Web.Models
+@inherits Umbraco.Web.Mvc.UmbracoViewPage<IPublishedContent>
+@{ 
+    string carouselId = "mainCarousel";
+    IEnumerable<IPublishedContent> carousel = Umbraco.AssignedContentItem.GetPropertyValue<IEnumerable<IPublishedContent>>(carouselId);
+   }
+ 
+@if (carousel != null && carousel.Any())
+{
+
+  <section id="intro">
+
+   
+    <div class="intro-content">
+      <h2>BUILDING <span>EXCELLENCE</span><br>DESIGN & BUILD!</h2>
+        <h4>LICENSED</h4>
+      <div>
+        <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        <a href="#portfolio" class="btn-projects scrollto">Our Projects</a>
+      </div>
+    </div>
+      <div id="intro-carousel" class="owl-carousel" >
+   
+     @{   var slides = Model.GetPropertyValue<IEnumerable<IPublishedContent>>(carouselId);
+foreach (IPublishedContent slide in slides.Where(x => x.IsVisible()))
+                {
+                
+                  string title = slide.GetPropertyValue<string>("slideTitle");
+                    string subtitle = slide.HasValue("slideSubtitle") ? slide.GetPropertyValue<string>("slideSubtitle") : "";
+                    string imageUrl = slide.HasValue("slideImage") ? slide.GetPropertyValue<IPublishedContent>("slideImage").Url : "/img/carousel.jpg";
+                    IEnumerable<RelatedLink> links = slide.GetPropertyValue<IEnumerable<RelatedLink>>("slideLink");
+                   RelatedLink link = links != null ? links.FirstOrDefault() : null;
+                
+                
+  
+      <div class="item" style="background-image: url('@(imageUrl)');"></div> 
+    
+}
+
+}
+  </section><!-- #intro -->
+ 
+}
